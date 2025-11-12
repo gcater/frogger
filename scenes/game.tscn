@@ -1,17 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://r8e5vdmp0k17"]
+[gd_scene load_steps=5 format=3 uid="uid://r8e5vdmp0k17"]
 
 [ext_resource type="Texture2D" uid="uid://doghmovcgeltw" path="res://graphics/map.png" id="1_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://nhsc3p8tpiq3" path="res://scenes/exercise.tscn" id="2_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bjy1c24lq0gf7" path="res://scenes/player.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://b6h30qaxpwyfr" path="res://scenes/tree.tscn" id="3_lnu2h"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lnu2h"]
+distance = -1.0
 
 [node name="Game" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_yqjtg")
 
-[node name="Exercise" parent="." instance=ExtResource("2_lbhrr")]
-position = Vector2(185, -58)
-
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
 position = Vector2(22, 63)
-scale = Vector2(10, 10)
+
+[node name="ExerciseObject" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(33, 107)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-192, 1)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_lnu2h")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-104, 321)
+shape = SubResource("WorldBoundaryShape2D_lnu2h")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(192, 215)
+rotation = 4.712389
+shape = SubResource("WorldBoundaryShape2D_lnu2h")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(-35, -320)
+rotation = -3.1415927
+shape = SubResource("WorldBoundaryShape2D_lnu2h")
