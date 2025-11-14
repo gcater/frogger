@@ -20,6 +20,8 @@ texture = ExtResource("1_yqjtg")
 [node name="Borders" type="Node2D" parent="."]
 
 [node name="UpBorder" type="StaticBody2D" parent="Borders"]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/UpBorder"]
 position = Vector2(-35, -320)
@@ -27,6 +29,8 @@ rotation = 3.1415925
 shape = SubResource("WorldBoundaryShape2D_lnu2h")
 
 [node name="LeftBorder" type="StaticBody2D" parent="Borders"]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/LeftBorder"]
 position = Vector2(-192, 1)
@@ -34,21 +38,27 @@ rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_lnu2h")
 
 [node name="DownBorder" type="StaticBody2D" parent="Borders"]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/DownBorder"]
 position = Vector2(-104, 321)
 shape = SubResource("WorldBoundaryShape2D_lnu2h")
 
 [node name="RightBorder" type="StaticBody2D" parent="Borders"]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RightBorder"]
 position = Vector2(192, 215)
 rotation = 4.712389
 shape = SubResource("WorldBoundaryShape2D_lnu2h")
 
-[node name="FinishArea2d" type="Area2D" parent="."]
+[node name="FinishArea2d" type="Area2D" parent="Borders"]
+collision_layer = 0
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishArea2d"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/FinishArea2d"]
 position = Vector2(12, -183.75)
 shape = SubResource("RectangleShape2D_lbhrr")
 
@@ -88,5 +98,5 @@ position = Vector2(-201, 169)
 [node name="Marker2D7" type="Marker2D" parent="CarStartPositions"]
 position = Vector2(205, 166)
 
-[connection signal="body_entered" from="FinishArea2d" to="." method="_on_finish_area_2d_body_entered"]
+[connection signal="body_entered" from="Borders/FinishArea2d" to="." method="_on_finish_area_2d_body_entered"]
 [connection signal="timeout" from="Timer/CarTimer" to="." method="_on_car_timer_timeout"]
