@@ -14,7 +14,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func animation():
-	print(direction)
 	if direction:
 		$AnimatedSprite2D.flip_h = direction.x > 0
 		if direction.x != 0:
