@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://r8e5vdmp0k17"]
+[gd_scene load_steps=10 format=3 uid="uid://r8e5vdmp0k17"]
 
 [ext_resource type="Script" uid="uid://4vxvmd16aeo1" path="res://scripts/game.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://doghmovcgeltw" path="res://graphics/map.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bjy1c24lq0gf7" path="res://scenes/player.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://b6h30qaxpwyfr" path="res://scenes/tree.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://v7h06usw1dvp" path="res://scenes/box.tscn" id="5_iywne"]
+[ext_resource type="Texture2D" uid="uid://cxutqp0hti8vw" path="res://graphics/objects/bench.png" id="6_p57ef"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lnu2h"]
 distance = -1.0
@@ -11,13 +13,18 @@ distance = -1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(278, 114.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
+size = Vector2(7.5, 7)
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lbhrr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_yqjtg")
+metadata/_edit_lock_ = true
 
 [node name="Borders" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="UpBorder" type="StaticBody2D" parent="Borders"]
 collision_layer = 8
@@ -68,6 +75,7 @@ shape = SubResource("RectangleShape2D_lbhrr")
 autostart = true
 
 [node name="Objects" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Player" parent="Objects" instance=ExtResource("2_lnu2h")]
 position = Vector2(22, 63)
@@ -75,7 +83,37 @@ position = Vector2(22, 63)
 [node name="Tree" parent="Objects" instance=ExtResource("3_lnu2h")]
 position = Vector2(-45, 50)
 
+[node name="Box" parent="Objects" instance=ExtResource("5_iywne")]
+position = Vector2(-28, 61)
+
+[node name="Box2" parent="Objects" instance=ExtResource("5_iywne")]
+position = Vector2(-54, 64)
+
+[node name="Bench" type="StaticBody2D" parent="Objects"]
+position = Vector2(-9, 61)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Objects/Bench"]
+rotation = 0.0013531846
+texture = ExtResource("6_p57ef")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Bench"]
+shape = SubResource("RectangleShape2D_u5sy4")
+
+[node name="Bench2" type="StaticBody2D" parent="Objects"]
+position = Vector2(56, 57)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Objects/Bench2"]
+rotation = 0.0013531846
+texture = ExtResource("6_p57ef")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Bench2"]
+shape = SubResource("RectangleShape2D_u5sy4")
+
 [node name="CarStartPositions" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="Marker2D" type="Marker2D" parent="CarStartPositions"]
 position = Vector2(207, 148)
@@ -97,6 +135,18 @@ position = Vector2(-201, 169)
 
 [node name="Marker2D7" type="Marker2D" parent="CarStartPositions"]
 position = Vector2(205, 166)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.5
+offset_right = 43.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "SOME TEXT"
 
 [connection signal="body_entered" from="Borders/FinishArea2d" to="." method="_on_finish_area_2d_body_entered"]
 [connection signal="timeout" from="Timer/CarTimer" to="." method="_on_car_timer_timeout"]

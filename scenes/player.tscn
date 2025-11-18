@@ -94,8 +94,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
-radius = 6.0
-height = 12.0
+radius = 5.0
+height = 10.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -104,10 +104,8 @@ script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"up"
+animation = &"down"
 autoplay = "down"
-frame = 1
-frame_progress = 0.053050086
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
